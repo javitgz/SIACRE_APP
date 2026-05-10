@@ -1,0 +1,19 @@
+# NetBeans y Java Ant (Rutas relativas a la raiz)
+backend_netbeans/nbproject/private/
+backend_netbeans/build/
+backend_netbeans/nbbuild/
+backend_netbeans/dist/
+backend_netbeans/nbdist/
+*.class
+
+# Android Studio y Gradle
+frontend_android/.gradle/
+frontend_android/local.properties
+frontend_android/.idea/
+frontend_android/build/
+frontend_android/captures/
+frontend_android/.externalNativeBuild/
+frontend_android/.cxx/
+*.iml
+*.hprof
+.DS_Store
