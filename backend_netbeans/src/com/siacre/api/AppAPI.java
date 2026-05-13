@@ -10,17 +10,19 @@ import com.siacre.dao.UsuarioDAO;
 import com.siacre.dao.ClienteDAO;
 import com.siacre.modelo.Usuario;
 import com.siacre.modelo.SolicitudCredito;
+
 /**
  *
  * @author roman
  */
 public class AppAPI {
+
     private static Gson gson = new Gson();
     private static UsuarioDAO usuarioDAO = new UsuarioDAO();
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         port(8080); // Puerto donde escuchara el backend
-        
+
         // Endpoint para Login con BD
         post("/login", (req, res) -> {
             Usuario u = gson.fromJson(req.body(), Usuario.class);
@@ -34,17 +36,19 @@ public class AppAPI {
             res.status(401);
             return "{\"status\":\"error\",\"message\":\"Credenciales inválidas\"}";
         });
-        
+
         // Endpoint para Crear usuario
         post("/usuarios", (req, res) -> {
             Usuario u = gson.fromJson(req.body(), Usuario.class);
             boolean ok = usuarioDAO.crear(u);
             res.type("application/json");
-            if (ok) return "{\"status\":\"success\"}";
+            if (ok) {
+                return "{\"status\":\"success\"}";
+            }
             res.status(400);
             return "{\"status\":\"error\"}";
         });
-        
+
         // Endpoint para Editar usuario
         put("/usuarios/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
@@ -52,42 +56,46 @@ public class AppAPI {
             u.setId(id);
             boolean ok = usuarioDAO.editar(u);
             res.type("application/json");
-            if (ok) return "{\"status\":\"success\"}";
+            if (ok) {
+                return "{\"status\":\"success\"}";
+            }
             res.status(400);
             return "{\"status\":\"error\"}";
         });
-        
+
         // Endpoint para listar usuarios
         get("/usuarios", (req, res) -> {
             res.type("application/json");
             return gson.toJson(usuarioDAO.listar());
         });
-        
+
         // Endpoint para eliminar usuario
-        delete("/usuarios/:id", (req, res) ->{
+        delete("/usuarios/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
-            if (id == 1) return "{\"status\": \"error\", \"message\": \"No se puede eliminar al admin\"}";
-            
-            if (usuarioDAO.eliminar(id)){
+            if (id == 1) {
+                return "{\"status\": \"error\", \"message\": \"No se puede eliminar al admin\"}";
+            }
+
+            if (usuarioDAO.eliminar(id)) {
                 return "{\"status\": \"success\"}";
             }
             return "{\"status\": \"error\"}";
         });
-        
+
         // Endpoint para listar clientes
         get("/clientes", (req, res) -> {
-        res.type("application/json");
+            res.type("application/json");
             ClienteDAO dao = new ClienteDAO();
             return gson.toJson(dao.listar());
         });
-        
+
         // endpoint para guardar cliente
         post("/clientes/guardar_completo", (req, res) -> {
-        res.type("application/json");
-    
+            res.type("application/json");
+
             // Usamos un Map para leer el JSON de forma flexible sin crear clases extra
             java.util.Map<String, Object> data = gson.fromJson(req.body(), java.util.Map.class);
-    
+
             com.siacre.modelo.Cliente c = new com.siacre.modelo.Cliente();
             c.setTipoDocumento((String) data.get("tipo_documento"));
             // Convertimos a int de forma segura (Gson suele leer números como Double)
@@ -112,6 +120,47 @@ public class AppAPI {
                 res.status(500);
                 return "{\"status\": \"error\", \"message\": \"Fallo en la base de datos\"}";
             }
+        });
+
+        // Obtener un cliente por ID
+        get("/clientes/:id", (req, res) -> {
+            int id = Integer.parseInt(req.params(":id"));
+            com.siacre.dao.ClienteDAO dao = new com.siacre.dao.ClienteDAO();
+            com.siacre.modelo.Cliente cliente = dao.obtenerPorId(id);
+            res.type("application/json");
+            if (cliente != null) {
+                return gson.toJson(cliente);
+            }
+            res.status(404);
+            return "{\"status\":\"error\",\"message\":\"Cliente no encontrado\"}";
+        });
+
+        // Endpoint para Editar cliente
+        put("/clientes/:id", (req, res) -> {
+            int id = Integer.parseInt(req.params(":id"));
+            com.siacre.modelo.Cliente c = gson.fromJson(req.body(), com.siacre.modelo.Cliente.class);
+            c.setId(id);
+            com.siacre.dao.ClienteDAO dao = new com.siacre.dao.ClienteDAO();
+            boolean ok = dao.editar(c);
+            res.type("application/json");
+            if (ok) {
+                return "{\"status\":\"success\"}";
+            }
+            res.status(400);
+            return "{\"status\":\"error\"}";
+        });
+
+        // Endpoint para Eliminar cliente
+        delete("/clientes/:id", (req, res) -> {
+            int id = Integer.parseInt(req.params(":id"));
+            com.siacre.dao.ClienteDAO dao = new com.siacre.dao.ClienteDAO();
+            boolean ok = dao.eliminar(id);
+            res.type("application/json");
+            if (ok) {
+                return "{\"status\":\"success\"}";
+            }
+            res.status(400);
+            return "{\"status\":\"error\"}";
         });
 
     }

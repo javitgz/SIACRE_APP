@@ -3,18 +3,29 @@ package com.siacre.app;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.siacre.modelo.Cliente;
+
 import java.util.List;
 
 public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHolder> {
 
     private List<Cliente> listaClientes;
+    private OnClienteClickListener listener;
 
-    public ClienteAdapter(List<Cliente> listaClientes) {
+    public interface OnClienteClickListener {
+        void onEditarClick(Cliente cliente);
+        void onEliminarClick(Cliente cliente);
+    }
+
+    public ClienteAdapter(List<Cliente> listaClientes, OnClienteClickListener listener) {
         this.listaClientes = listaClientes;
+        this.listener = listener;
     }
 
     @NonNull
@@ -28,11 +39,18 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cliente cliente = listaClientes.get(position);
-        // Usamos los métodos del modelo
         String nombreCompleto = (cliente.getNombres() != null ? cliente.getNombres() : "") + " " +
                 (cliente.getApellidos() != null ? cliente.getApellidos() : "");
         holder.tvNombre.setText(nombreCompleto.trim());
         holder.tvDocumento.setText("CC: " + cliente.getDocumento());
+
+        holder.btnEdit.setOnClickListener(v -> {
+            if (listener != null) listener.onEditarClick(cliente);
+        });
+
+        holder.btnDelete.setOnClickListener(v -> {
+            if (listener != null) listener.onEliminarClick(cliente);
+        });
     }
 
     @Override
@@ -42,11 +60,14 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombre, tvDocumento;
+        ImageButton btnEdit, btnDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombre = itemView.findViewById(R.id.tvItemNombre);
             tvDocumento = itemView.findViewById(R.id.tvItemDocumento);
+            btnEdit = itemView.findViewById(R.id.btnEditCliente);
+            btnDelete = itemView.findViewById(R.id.btnDeleteCliente);
         }
     }
 }

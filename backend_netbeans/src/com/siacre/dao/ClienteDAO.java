@@ -7,6 +7,7 @@ package com.siacre.dao;
 import com.siacre.conexion.Conexion;
 import com.siacre.modelo.Cliente;
 import com.siacre.modelo.SolicitudCredito;
+import com.siacre.dao.ClienteDAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,9 +95,66 @@ public class ClienteDAO {
             c.setTelefono(rs.getString("telefono"));
             lista.add(c);
         }
-    } catch (SQLException e) {
-        System.out.println("Error al listar clientes: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error al listar clientes: " + e.getMessage());
+        }
+        return lista;
     }
-    return lista;
-}
+    
+    // Obtener cliente por ID
+    public Cliente obtenerPorId(int id) {
+        String sql = "SELECT * FROM clientes WHERE id = ?";
+        try (Connection con = Conexion.conectar();
+            PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Cliente c = new Cliente();
+                c.setId(rs.getInt("id"));
+                c.setTipoDocumento(rs.getString("tipo_documento"));
+                c.setDocumento(rs.getInt("documento"));
+                c.setNombres(rs.getString("nombres"));
+                c.setApellidos(rs.getString("apellidos"));
+                c.setCorreo(rs.getString("correo"));
+                c.setTelefono(rs.getString("telefono"));
+                c.setIdUsuario(rs.getInt("id_usuario"));
+                return c;
+            }
+            } catch (SQLException e) {
+                System.out.println("Error al obtener cliente: " + e.getMessage());
+            }
+            return null;
+    }
+
+    // Editar cliente
+    public boolean editar(Cliente c) {
+        String sql = "UPDATE clientes SET tipo_documento=?, documento=?, nombres=?, apellidos=?, correo=?, telefono=? WHERE id=?";
+        try (Connection con = Conexion.conectar();
+            PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, c.getTipoDocumento());
+            ps.setInt(2, c.getDocumento());
+            ps.setString(3, c.getNombres());
+            ps.setString(4, c.getApellidos());
+            ps.setString(5, c.getCorreo());
+            ps.setString(6, c.getTelefono());
+            ps.setInt(7, c.getId());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al editar cliente: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Eliminar cliente
+    public boolean eliminar(int id) {
+        String sql = "DELETE FROM clientes WHERE id=?";
+        try (Connection con = Conexion.conectar();
+            PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+            } catch (SQLException e) {
+                System.out.println("Error al eliminar cliente: " + e.getMessage());
+                return false;
+            }
+    }
 }

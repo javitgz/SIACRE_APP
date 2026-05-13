@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etDialogNombres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombres"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etDialogApellidos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Apellidos"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etDialogDocumento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Documento"
+        android:inputType="number"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etDialogCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etDialogTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Teléfono"
+        android:inputType="phone" />
+</LinearLayout>
