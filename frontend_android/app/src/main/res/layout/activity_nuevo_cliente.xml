@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:id="@+id/layoutNotif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/siacre_red">
+
+            <ImageView
+                android:id="@+id/ivNotifIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_dialog_alert"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tvNotifMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡Error al ingresar!"
+                android:textColor="@color/white"
+                android:layout_marginStart="12dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingHorizontal="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBackWizard"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"/>
+
+        <TextView
+            android:id="@+id/tvWizardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Creación de Clientes"
+            android:textColor="#1A237E"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:id="@+id/layoutStep1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de documento *"
+                    android:textStyle="bold"/>
+                <Spinner android:id="@+id/spTipoDoc"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Documento *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etDocumento"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="0000000000"
+                    android:inputType="number"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombres *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etNombres"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Nombres"
+                    android:inputType="textPersonName"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apellidos *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etApellidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Apellidos"
+                    android:inputType="textPersonName"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teléfono *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="9999999999"
+                    android:inputType="phone"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo electrónico *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etCorreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="nombre@example.com"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monto Solicitado *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etMonto"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="0.00"
+                    android:inputType="numberDecimal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutStep2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de persona *"
+                    android:textStyle="bold"/>
+                <Spinner android:id="@+id/spTipoPersona"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de contrato *"
+                    android:textStyle="bold"/>
+                <Spinner android:id="@+id/spTipoContrato"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sector económico *"
+                    android:textStyle="bold"/>
+                <Spinner android:id="@+id/spSector"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nivel educativo *"
+                    android:textStyle="bold"/>
+                <Spinner android:id="@+id/spNivelEdu"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha inicio contrato *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etFechaInicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="YYYY-MM-DD"
+                    android:inputType="date"
+                    android:layout_marginBottom="12dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutStep3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total activos corrientes *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etActivos1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total activos no corrientes *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etActivosNC1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total pasivos corrientes *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etPasivos1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total pasivos no corrientes *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etPasivosNC1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total patrimonio *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etPatrimonio1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total ingresos anuales *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etIngresos1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total costos anuales *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etCostos1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total gastos anuales *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etGastos1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutStep4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total activos corrientes *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etActivos2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total activos no corrientes *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etActivosNC2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total pasivos corrientes *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etPasivos2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total pasivos no corrientes *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etPasivosNC2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total patrimonio *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etPatrimonio2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total ingresos anuales *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etIngresos2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total costos anuales *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etCostos2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total gastos anuales *"
+                    android:textStyle="bold"/>
+                <EditText android:id="@+id/etGastos2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="999.999.999"
+                    android:inputType="numberDecimal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnNextWizard"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="20dp"
+        android:text="Siguiente"
+        android:backgroundTint="#1A237E"
+        android:textColor="@color/white"
+        android:textAllCaps="false"/>
+
+</LinearLayout>

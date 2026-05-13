@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="siacre_navy">#0A1F44</color>
+    <color name="siacre_primary">#4A78A8</color>
+    <color name="siacre_dark">#1A237E</color>
+    <color name="siacre_orange">#FF9800</color>
+    <color name="siacre_card_blue">#1E293B</color>
+    <color name="siacre_red">#D32F2F</color>
+    <color name="siacre_green">#00B894</color>
+    <color name="siacre_bg">#F5F5F5</color>
+    <color name="siacre_bg_dark">#B6C4D2</color>
+    <color name="text_hint">#B0BEC5</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="siacre_text_green">#45C486</color>
+    <color name="siacre_yellow_text">#F6E05E</color>
+    <color name="siacre_progress_bg">#2D3748</color>
+    <color name="btn_nuevo">#5C85BB</color>
+    <color name="btn_rechazado">#D3544E</color>
+    <color name="btn_aprobado">#70AF85</color>
+    <color name="btn_editar">#FBC02D</color>
+    <color name="btn_borrar">#D32F2F</color>
+</resources>

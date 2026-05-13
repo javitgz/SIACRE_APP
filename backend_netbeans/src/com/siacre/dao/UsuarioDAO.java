@@ -34,13 +34,17 @@ public class UsuarioDAO {
     public List<Usuario> listar() {
         List<Usuario> lista = new ArrayList<>();
         String sql = "SELECT * FROM usuarios";
-        try (Connection con = Conexion.conectar(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        try (Connection con = Conexion.conectar(); 
+                Statement st = con.createStatement(); 
+                ResultSet rs = st.executeQuery(sql)) {
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getInt("id"));
                 u.setNombres(rs.getString("nombres"));
+                u.setApellidos(rs.getString("apellidos"));
                 u.setCorreo(rs.getString("correo"));
-                // ... setear los demás campos
+                u.setId_rol(rs.getInt("id_rol"));
+                // No se devuelve la clave (por seguridad)
                 lista.add(u);
             }
         } catch (SQLException e) {
@@ -51,14 +55,34 @@ public class UsuarioDAO {
 
     // UPDATE - Editar Usuario
     public boolean editar(Usuario user) {
-        String sql = "UPDATE usuarios SET nombres=?, apellidos=?, correo=? WHERE id=?";
-        try (Connection con = Conexion.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
+        String sql;
+        
+        boolean actualizarClave = (user.getClave() != null && !user.getClave().isEmpty());
+        
+        if(actualizarClave){
+            sql = "UPDATE usuarios SET nombres=?, apellidos=?, correo=?, clave=? WHERE id=?";
+        }else{
+            sql= "UPDATE usuarios SET nombres=?, apellidos=?, correo=? WHERE id=?";
+        }
+        
+        try (Connection con = Conexion.conectar(); 
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            
             ps.setString(1, user.getNombres());
             ps.setString(2, user.getApellidos());
             ps.setString(3, user.getCorreo());
-            ps.setInt(4, user.getId());
+            
+            if(actualizarClave){
+                ps.setString(4, user.getClave());
+                ps.setInt(5, user.getId());
+            }else {
+                ps.setInt(4, user.getId());
+            }
+            
             return ps.executeUpdate() > 0;
+            
         } catch (SQLException e) {
+            System.out.println("Error al editar: " + e.getMessage());
             return false;
         }
     }
@@ -72,5 +96,26 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             return false;
         }
+    }
+    
+    // AUTH - Validar usuario
+    public Usuario validar(String correo, String clave) {
+        String sql = "SELECT * FROM usuarios WHERE correo = ? AND clave = ?";
+        try (Connection con = Conexion.conectar();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, correo);
+            ps.setString(2, clave); // Más adelante usa hash, por ahora texto plano
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Usuario u = new Usuario();
+                u.setId(rs.getInt("id"));
+                u.setNombres(rs.getString("nombres"));
+                u.setApellidos(rs.getString("apellidos"));
+                u.setCorreo(rs.getString("correo"));
+                u.setId_rol(rs.getInt("id_rol"));
+                return u;
+            }
+        } catch (SQLException e) { e.printStackTrace(); }
+        return null;
     }
 }

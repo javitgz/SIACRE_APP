@@ -8,6 +8,8 @@ import com.siacre.conexion.Conexion;
 import com.siacre.modelo.Cliente;
 import com.siacre.modelo.SolicitudCredito;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author roman
@@ -76,4 +78,25 @@ public class ClienteDAO {
             } catch (SQLException e) {}
         }
     }
+    
+    public List<Cliente> listar() {
+    List<Cliente> lista = new ArrayList<>();
+    String sql = "SELECT * FROM clientes";
+    try (Connection con = Conexion.conectar(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        while (rs.next()) {
+            Cliente c = new Cliente();
+            c.setId(rs.getInt("id"));
+            c.setTipoDocumento(rs.getString("tipo_documento"));
+            c.setDocumento(rs.getInt("documento"));
+            c.setNombres(rs.getString("nombres"));
+            c.setApellidos(rs.getString("apellidos"));
+            c.setCorreo(rs.getString("correo"));
+            c.setTelefono(rs.getString("telefono"));
+            lista.add(c);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al listar clientes: " + e.getMessage());
+    }
+    return lista;
+}
 }

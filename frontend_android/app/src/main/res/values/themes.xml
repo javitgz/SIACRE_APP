@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Frontend_android" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/siacre_navy</item>
+    </style>
+
+    <style name="Theme.Frontend_android" parent="Base.Theme.Frontend_android">
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundTint">@null</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="Theme.Siacre" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/siacre_navy</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+    </style>
+
+    <style name="Theme.Siacre.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/siacre_navy</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_siacre_oscuro</item>
+        <item name="postSplashScreenTheme">@style/Theme.Siacre</item>
+    </style>
+
+</resources>
