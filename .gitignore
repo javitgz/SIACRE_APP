@@ -17,3 +17,5 @@ frontend_android/.cxx/
 *.iml
 *.hprof
 .DS_Store
+backend_netbeans/target/
+backend_netbeans/resources/*.json
